@@ -4,7 +4,7 @@ require("andreas.autocommands")
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
---    `:help lazy.nvim.txt` for more info
+--    `:help lazy.nvim.txt` for more --[[ info ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -21,13 +21,14 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+  'tpope/vim-fugitive', -- git wrapper
   -- Themes
   { 'rose-pine/neovim',              name = 'rose-pine' },
   { 'folke/tokyonight.nvim' },
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',          opts = {} },
-
+  { "tpope/vim-surround" }, -- add, delete, change surroundings
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x',  dependencies = { 'nvim-lua/plenary.nvim' } },
 
@@ -52,6 +53,7 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  -- LSP
   {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
@@ -83,6 +85,18 @@ require('lazy').setup({
       require("nvim-tree").setup {}
     end,
   },
-  { "mbbill/undotree" }
-
+  { "mbbill/undotree" },
+  {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {
+      check_ts = true,
+    } -- this is equalent to setup({}) function
+  }
 })
