@@ -26,3 +26,9 @@ vim.keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Fi
 vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>")                                      -- list open buffers in current neovim instance
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")                                          -- list available help tags
 vim.keymap.set("n", "<leader>?", "<cmd>Telescope oldfiles<cr>", { desc = "Find recently opened files" })
+
+-- tmux
+vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
+vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>")
+vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>")
