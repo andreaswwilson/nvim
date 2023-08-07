@@ -21,16 +21,16 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
-  'tpope/vim-fugitive', -- git wrapper
-  -- Themes
-  { 'rose-pine/neovim',              name = 'rose-pine' },
-  { 'folke/tokyonight.nvim' },
+  -- lazygit
+  'kdheepak/lazygit.nvim',
+  --   -- Themes
+  { "catppuccin/nvim" },
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',          opts = {} },
   { "tpope/vim-surround" }, -- add, delete, change surroundings
   -- Fuzzy Finder (files, lsp, etc)
-  { 'nvim-telescope/telescope.nvim', branch = '0.1.x',  dependencies = { 'nvim-lua/plenary.nvim' } },
+  { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
@@ -48,6 +48,7 @@ require('lazy').setup({
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    lazy = true,
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
@@ -75,6 +76,14 @@ require('lazy').setup({
     }
   },
   {
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     lazy = false,
@@ -99,5 +108,17 @@ require('lazy').setup({
       check_ts = true,
     } -- this is equalent to setup({}) function
   },
-  "christoomey/vim-tmux-navigator"
+  "christoomey/vim-tmux-navigator",
+  "jose-elias-alvarez/null-ls.nvim",
+
+  -- Code folding
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+    event = "VeryLazy",
+    opts = {},
+    config = function()
+      require("ufo").setup()
+    end,
+  },
 })

@@ -9,17 +9,15 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cmd> w <CR>', { desc = 'Save file' })
-
-
+vim.keymap.set("n", "<tab>", '<cmd>bn<cr>', { desc = 'Next buffer' })
+vim.keymap.set("n", "S-<tab>", '<cmd>bn<cr>', { desc = 'Previous buffer' })
 ----------------------
 -- Plugin Keybinds
 ----------------------
 -- nvim-tree
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
 
-
 -- telescope
-
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })                -- find files within current working directory, respects .gitignore
 vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find by grep" })               -- find string in current working directory as you type
 vim.keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor" }) -- find string under cursor in current working directory
@@ -32,3 +30,15 @@ vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>")
 vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>")
+
+-- Lazygit
+vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>")
+
+-- Undotree
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "UndotreeToggle" })
+
+-- nvim-ufo settings
+vim.o.foldcolumn = "1" -- '0' is not bad
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
