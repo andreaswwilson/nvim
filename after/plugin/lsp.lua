@@ -1,9 +1,15 @@
 local lsp = require('lsp-zero')
-lsp.preset("recommended")
 
-lsp.on_attach(function(client, bufnr)
-  lsp.default_keymaps({ buffer = bufnr })
-end)
+lsp.set_server_config({
+  capabilities = {
+    textDocument = {
+      foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+      }
+    }
+  }
+})
 
 lsp.ensure_installed({
   'bashls',
@@ -15,17 +21,36 @@ lsp.ensure_installed({
   'yamlls',
 })
 
--- Autoformat on save
-lsp.on_attach(function(client, bufnr)
+
+
+lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({ buffer = bufnr })
+
+  -- Autoformat on save
   lsp.buffer_autoformat()
-  vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', { buffer = true, desc = "LSP references" })
+
+  -- Add keymaps. Mainly as default, but adding them for reference
   vim.keymap.set('n', 'rn', '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = true, desc = "LSP rename" })
+  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', { buffer = true, desc = "Show LSP hover information" })
+  vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = true, desc = "Go to LSP definition" })
+  vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', { buffer = true, desc = "Go to LSP declaration" })
+  vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>',
+    { buffer = true, desc = "Go to LSP implementation" })
+  vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>',
+    { buffer = true, desc = "Go to LSP type definition" })
+  vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>',
+    { buffer = true, desc = "Show LSP signature help" })
+  vim.keymap.set('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<cr>',
+    { buffer = true, desc = "Trigger LSP code actions" })
+  vim.keymap.set('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>',
+    { buffer = true, desc = "Open diagnostics floating window" })
+  vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>',
+    { buffer = true, desc = "Go to previous diagnostic location" })
+  vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>',
+    { buffer = true, desc = "Go to next diagnostic location" })
+  vim.keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>',
+    { buffer = true, desc = "Search LSP references using Telescope" })
 end)
-
-
--- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 local cmp = require('cmp')
 cmp.setup({
@@ -40,6 +65,24 @@ cmp.setup({
 
 lsp.setup()
 
-vim.diagnostic.config({
-  virtual_text = true
+-- Null-ls
+local null_ls = require('null-ls')
+
+null_ls.setup({
+  sources = {
+    -- make sure the source name is supported by null-ls
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
+    null_ls.builtins.formatting.gofumpt,
+    null_ls.builtins.formatting.goimports,
+    null_ls.builtins.diagnostics.golangci_lint,
+    null_ls.builtins.diagnostics.revive,
+    null_ls.builtins.formatting.black
+  }
+})
+
+-- See mason-null-ls.nvim's documentation for more details:
+-- https://github.com/jay-babu/mason-null-ls.nvim#setup
+require('mason-null-ls').setup({
+  ensure_installed = nil,
+  automatic_installation = true,
 })

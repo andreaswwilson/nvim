@@ -22,3 +22,9 @@ vim.opt.smartcase = true
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- nvim-ufo
+vim.opt.foldcolumn = '1' -- '0' is not bad
+vim.opt.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
