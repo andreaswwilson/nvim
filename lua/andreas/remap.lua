@@ -1,7 +1,7 @@
-vim.g.mapleader = " "
+im.g.mapleader = " "
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Move selected lines in visual mode
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-vim.keymap.set("x", "<leader>p", [["_dP]])   -- Dont overwrite regster when pasting
+vim.keymap.set("x", "<leader>p", [["_dP]])   -- Don't overwrite register when pasting
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set("n", "x", '"_x')              -- delete single char without copy into register
 -- Remap for dealing with word wrap
@@ -12,7 +12,7 @@ vim.keymap.set({ 'n', 'i' }, '<C-s>', '<cmd> w <CR>', { desc = 'Save file' })
 vim.keymap.set("n", "<tab>", '<cmd>bn<cr>', { desc = 'Next buffer' })
 vim.keymap.set("n", "S-<tab>", '<cmd>bn<cr>', { desc = 'Previous buffer' })
 ----------------------
--- Plugin Keybinds
+-- Plugin key bindings
 ----------------------
 -- nvim-tree
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer

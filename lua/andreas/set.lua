@@ -22,3 +22,10 @@ vim.opt.smartcase = true
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+-- spell checking
+-- ]s next misspelled word
+-- z= - suggestion
+-- zg - add to spell
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
