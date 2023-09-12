@@ -1,4 +1,4 @@
-im.g.mapleader = " "
+vim.g.mapleader = " "
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- Move selected lines in visual mode
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("x", "<leader>p", [["_dP]])   -- Don't overwrite register when pasting
