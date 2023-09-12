@@ -36,9 +36,3 @@ vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>")
 
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "UndotreeToggle" })
-
--- nvim-ufo settings
-vim.o.foldcolumn = "1" -- '0' is not bad
-vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
