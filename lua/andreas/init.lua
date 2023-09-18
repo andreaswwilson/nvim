@@ -28,10 +28,8 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',          opts = {} },
-  { "tpope/vim-surround" }, -- add, delete, change surroundings
   -- Fuzzy Finder (files, lsp, etc)
   { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
-
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
   -- requirements installed.
@@ -54,6 +52,8 @@ require('lazy').setup({
     },
     build = ':TSUpdate',
   },
+  -- auto pair
+  { 'cohama/lexima.vim' },
   -- LSP
   { 'VonHeikemen/lsp-zero.nvim',        branch = 'v3.x' },
   --- Uncomment these if you want to manage LSP servers from neovim
@@ -99,13 +99,6 @@ require('lazy').setup({
       -- add any options here
     },
     lazy = false,
-  },
-  {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {
-      check_ts = true,
-    } -- this is equalent to setup({}) function
   },
   "christoomey/vim-tmux-navigator",
   "jose-elias-alvarez/null-ls.nvim",
