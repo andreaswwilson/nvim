@@ -1,1 +1,2 @@
-require("andreas")
+require("andreas.core")
+require("andreas.lazy")
