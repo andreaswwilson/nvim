@@ -9,30 +9,18 @@ return {
 		local formatting = null_ls.builtins.formatting -- to setup formatters
 		local diagnostics = null_ls.builtins.diagnostics -- to setup linters
 
-		-- to setup format on save
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-		-- configure null_ls
 		null_ls.setup({
-			-- setup formatters & linters
 			sources = {
-				-- make sure the source name is supported by null-ls
-				-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md
-				-- golang
-				formatting.gofumpt,
-				formatting.goimports,
-				diagnostics.golangci_lint,
-				-- Lua
+				diagnostics.mypy.with({
+					extra_args = function()
+						local virtual = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_DEFAULT_ENV") or "/usr"
+						return { "--python-executable", virtual .. "/bin/python3" }
+					end,
+				}),
 				formatting.stylua,
-				-- Python
-				formatting.black,
-				formatting.isort,
-				diagnostics.ruff,
-				diagnostics.mypy,
-				-- Terraform
-				diagnostics.terraform_validate,
-				formatting.terraform_fmt,
+				formatting.prettier,
 			},
-
 			-- configure format on save
 			on_attach = function(client, bufnr)
 				if client.supports_method("textDocument/formatting") then
