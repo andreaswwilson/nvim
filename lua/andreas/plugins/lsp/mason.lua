@@ -4,6 +4,8 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"jayp0521/mason-null-ls.nvim",
 		"jose-elias-alvarez/null-ls.nvim",
+		"mfussenegger/nvim-dap",
+		"jay-babu/mason-nvim-dap.nvim",
 	},
 	config = function()
 		require("mason").setup({})
@@ -23,6 +25,9 @@ return {
 		require("mason-null-ls").setup({
 			automatic_installation = true,
 		})
-
+		require("mason-nvim-dap").setup({
+			ensure_installed = { "python", "delve" },
+			handlers = {}, -- sets up dap in the predefined manner
+		})
 	end,
 }

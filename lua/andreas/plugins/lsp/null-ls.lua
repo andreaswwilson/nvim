@@ -18,8 +18,11 @@ return {
 						return { "--python-executable", virtual .. "/bin/python3" }
 					end,
 				}),
+				formatting.prettierd, -- first due to rare race conditions
+				formatting.black,
+				formatting.gofumpt,
 				formatting.stylua,
-				formatting.prettier,
+				formatting.terraform_fmt,
 			},
 			-- configure format on save
 			on_attach = function(client, bufnr)

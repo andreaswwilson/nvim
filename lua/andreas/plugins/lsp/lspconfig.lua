@@ -21,7 +21,7 @@ return {
 
       -- set keybinds
       opts.desc = "Show LSP references"
-      keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+      keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
       opts.desc = "Go to declaration"
       keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
@@ -71,15 +71,15 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+    local servers = { "pyright", "gopls", "terraformls" }
     -- configure servers
-    lspconfig["pyright"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-    lspconfig["gopls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    for _, server in ipairs(servers) do
+      lspconfig[server].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+    end
+
     -- configure lua server (with special settings)
 
     lspconfig["lua_ls"].setup({
