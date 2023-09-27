@@ -5,7 +5,6 @@ return {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-tree/nvim-web-devicons",
-		"debugloop/telescope-undo.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
@@ -26,7 +25,6 @@ return {
 		})
 
 		telescope.load_extension("fzf")
-		telescope.load_extension("undo")
 
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
@@ -36,6 +34,5 @@ return {
 		keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
 		keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
 		keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
-		keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>", { desc = "Telescope undo" })
 	end,
 }
