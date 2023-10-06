@@ -32,11 +32,15 @@ return {
 				-- go
 				"golangci-lint",
 				"gofumpt",
+				"goimports",
 				-- lua
 				"stylua",
 				"luacheck",
 				-- json
 				"jsonlint",
+				-- bash
+				"shfmt",
+				"shellcheck",
 			},
 		})
 
