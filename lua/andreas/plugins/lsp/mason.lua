@@ -2,9 +2,10 @@ return {
 	"williamboman/mason.nvim",
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
+		"jayp0521/mason-null-ls.nvim",
+		"jose-elias-alvarez/null-ls.nvim",
 		"mfussenegger/nvim-dap",
 		"jay-babu/mason-nvim-dap.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	config = function()
 		require("mason").setup({})
@@ -21,29 +22,9 @@ return {
 			automatic_installation = true, -- not the same as ensure_installed
 		})
 
-		-- Used to install linters and formatters
-		require("mason-tool-installer").setup({
-			ensure_installed = {
-				"prettierd",
-				-- python
-				"ruff",
-				"black",
-				"mypy",
-				-- go
-				"golangci-lint",
-				"gofumpt",
-				"goimports",
-				-- lua
-				"stylua",
-				"luacheck",
-				-- json
-				"jsonlint",
-				-- bash
-				"shfmt",
-				"shellcheck",
-			},
+		require("mason-null-ls").setup({
+			automatic_installation = true,
 		})
-
 		require("mason-nvim-dap").setup({
 			ensure_installed = { "python", "delve" },
 			handlers = {}, -- sets up dap in the predefined manner
