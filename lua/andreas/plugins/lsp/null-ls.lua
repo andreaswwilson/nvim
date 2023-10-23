@@ -19,10 +19,13 @@ return {
 					end,
 				}),
 				formatting.prettierd, -- first due to rare race conditions
+				formatting.isort,
 				formatting.black,
 				formatting.gofumpt,
 				formatting.stylua,
 				formatting.terraform_fmt,
+				formatting.ruff,
+				formatting.jq,
 			},
 			-- configure format on save
 			on_attach = function(client, bufnr)

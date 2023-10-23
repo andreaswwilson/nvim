@@ -71,7 +71,7 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    local servers = { "pyright", "gopls", "terraformls" }
+    local servers = { "pyright", "gopls", "terraformls", "jqls" }
     -- configure servers
     for _, server in ipairs(servers) do
       lspconfig[server].setup({
