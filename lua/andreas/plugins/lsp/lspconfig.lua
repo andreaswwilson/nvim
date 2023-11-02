@@ -71,7 +71,7 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    local servers = { "pyright", "gopls", "terraformls", "jqls" }
+    local servers = { "pyright", "gopls", "jqls" }
     -- configure servers
     for _, server in ipairs(servers) do
       lspconfig[server].setup({
@@ -79,7 +79,12 @@ return {
         on_attach = on_attach,
       })
     end
-
+    -- configure terraformls
+    lspconfig.terraformls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "terraform" }, -- Specify the filetypes for which terraformls should be activated
+    })
     -- configure lua server (with special settings)
 
     lspconfig["lua_ls"].setup({
