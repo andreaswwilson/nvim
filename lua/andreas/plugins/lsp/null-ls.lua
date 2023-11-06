@@ -1,5 +1,5 @@
 return {
-	"jose-elias-alvarez/null-ls.nvim", -- configure formatters & linters
+	"nvimtools/none-ls.nvim", -- configure formatters & linters
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		-- import null-ls plugin
@@ -26,6 +26,8 @@ return {
 				formatting.terraform_fmt,
 				formatting.ruff,
 				formatting.jq,
+				null_ls.builtins.code_actions.shellcheck,
+				formatting.shfmt,
 			},
 			-- configure format on save
 			on_attach = function(client, bufnr)
